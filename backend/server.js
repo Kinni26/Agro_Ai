@@ -19,7 +19,10 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+app.use(cors({ 
+  origin: '*',
+  credentials: false
+}));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -33,7 +36,7 @@ app.use('/api/community', require('./routes/community.routes'));
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'KisaanAI Server is running 🌾' });
+  res.json({ status: 'OK', message: 'KisaanAI Server is running' });
 });
 
 // MongoDB connect + start
